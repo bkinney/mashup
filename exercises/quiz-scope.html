@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<!--
+This page should be loaded into the mmashup.php template iframe, which is similar to the multitool.php page, except that the score reporting functions are replaced by the callback within the listricksQuiz closure. Hopefully this makes it a tiny bit harder to hack.
+-->
+<meta charset="utf-8">
+<title>Quiz Template Compact</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="/canvas/mashup/listtricks-quiz.js"></script>
+  
+<!-- <script src="../canvas/quiz.js"></script> <style>
+  .hidden{display:none}
+  </style>-->
+<link href="/canvas/liststricks-quiz.css" rel="stylesheet" type="text/css">
+<link href="/canvas/mashup/mashup.css" rel="stylesheet" type="text/css">
+<style>
+.left .quiz{background: rgb(69, 194, 253);}
+iframe{
+	
+	margin-left:2px;
+}
+</style>
+</head>
+
+<body>
+<div id="quiz"><ol>
+<li>This is a question. Now I will indent the next bullet point to create the correct answer.
+	<ol>
+		<li>This is the correct answer. 
+		  <ol>
+		    <li>Notice that it does not necessarily as answer a).</li>
+	      </ol>
+	    </li>
+		<li>Here is an incorrect answer. 
+		  <ol>
+		    <li>I can create as many of these as I want.</li>
+	      </ol>
+	    </li>
+		<li>As I type this answer, it shows up in the editor as a level 2 item with the number 3.
+		  <ol>
+		    <li>feedback goes here.</li>
+	      </ol>
+		</li>
+		<li>And here is the original number 4. Note that in addition to randomizing, the quiz script also changes the style of the outline so that these options appear as letters rather than numbers.
+		  <ol>
+		    <li>how do you like it?</li>
+	      </ol>
+		</li>
+	  </ol>
+	<!--end answers -->
+</li><!--end q1 -->
+<li>Unfortunately, the Canvas editor is not great for authoring numbered lists. The tab and shift-tab keys don't work as they do in a quality text editor. Instead, you have to used the indent buttons.
+<ol>
+
+	<li>This question has answer-specific feedback. Click any answer option to reveal the feedback.
+		<ol>
+			<li>Good job.</li>
+		</ol>
+	</li>
+	<li>This in an incorrect answer with feedback.
+		<ol>
+			<li>Ideally, feedback should reflect the type of error a student made in choosing a particular response.</li>
+		</ol>
+        </li>
+	<li>When I finish with this final answer option, I will be sure to exit completely out of list-editing mode by clicking on the numbered list button until it appears unselected.
+		<ol>
+			<li>Be sure to do this, or your quizzes may fail.</li>
+		</ol>
+     </li>
+    </ol>
+    </li>
+</ol><div id="success"></div></div>
+   
+<iframe src="https://www.udel.edu/biology/ketcham/microscope/scope.html" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<script>
+function sendScore(obj){
+
+var post = new Object();
+	for(var x in obj){
+		post[x]=obj[x];
+		
+	}
+	
+		$("#success").load("reportScore.php",post,function(response){
+		$("body").html("<p>Your grade has been submitted</p>");
+	});//.hide();;
+	
+}
+$(document).ready(function(e) {
+	//if($("iframe[src^='http:']").length)parent.loadhttp();
+	$('#quiz').listtricksQuiz({sendScore:sendScore,addClass:'left'});
+    
+});
+</script>
+</body>
+</html>

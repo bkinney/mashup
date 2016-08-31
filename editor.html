@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+<head>
+<title>Free Online HTML Editor</title>
+
+
+
+
+<!-- OF COURSE YOU NEED TO ADAPT NEXT LINE TO YOUR tiny_mce.js PATH -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="tinymce/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+	
+	plugins :"lists,template,code,save,paste",
+toolbar1: "save | newdocument | bold italic | bullist numlist | subscript superscript | code | undo redo",
+       /* toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote| inserttime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat || charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",*/
+	paste_auto_cleanup_on_paste : true,
+	
+	menubar: false,
+	fix_list_elements : true,
+	      paste_preprocess : function(pl, o) {
+			 alert("Sorry, pasting lists from MS Word does not work well. Your questions will probably not display properly when you use Word to compose your questions."); 
+            // Content string containing the HTML from the clipboard
+			o.content = o.content.replace("</li></ol></li></ol><p>","<ol><li>");
+			o.content = o.content.replace("</p>","</li></ol></li>");
+			o.content = o.content.replace("i.","");
+            
+           // o.content = "-: CLEANED :-\n" + o.content;
+        },
+        paste_postprocess : function(pl, o) {
+            // Content DOM node containing the DOM structure of the clipboard
+            //alert(o.node.innerHTML);
+           // o.node.innerHTML = o.node.innerHTML + "\n-: CLEANED :-";
+        },
+	
+	templates: [
+                {title: 'Self-Test Mashup', url: 'quiz-compact.html'}
+                
+        ]
+
+ });
+   
+
+
+</script>
+
+
+</head>
+<body >
+<!-- OF COURSE YOU NEED TO ADAPT ACTION TO WHAT PAGE YOU WANT TO LOAD WHEN HITTING "SAVE" -->
+<form method="post" action="show.php">
+<p>To create your own assignment mashup, enter the url of the content page you want in the main panel. Then create your quiz questions as a bulleted list.</p>
+content page: <input id="content_url" name="content_url" type="text" size="50"/>
+assignment title: <input id="title" name="title" type="text" size="50" />
+subfolder: <input id="folder" name="folder"  placeholder="UDelNetID" size="20"/>
+<p align="center">
+<textarea id="tiny" name="content" cols="150" rows="30">Enter your quiz here in outline form. 
+<p>Level 1 = Question</p>
+<p>Level 2 = Answers (correct answer first)</p>
+<p>Level 3 = feedback (optional, but highly recommended.)</p></textarea>
+</p>
+</form>
+
+</body>
+</html>

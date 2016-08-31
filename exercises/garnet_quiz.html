@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<!--
+This page should be loaded into the mmashup.php template iframe, which is similar to the multitool.php page, except that the score reporting functions are replaced by the callback within the listricksQuiz closure. Hopefully this makes it a tiny bit harder to hack.
+-->
+<meta charset="utf-8">
+<title>Quiz Template Compact</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="/canvas/mashup/listtricks-quiz.js"></script>
+  
+<!-- <script src="../canvas/quiz.js"></script> <style>
+  .hidden{display:none}
+  </style>-->
+<link href="/canvas/liststricks-quiz.css" rel="stylesheet" type="text/css">
+<link href="/canvas/mashup/mashup.css" rel="stylesheet" type="text/css">
+<style>
+.left .quiz{background: rgb(69, 194, 253);}
+iframe{
+	
+	margin-left:2px;
+}
+</style>
+</head>
+
+<body>
+<div id="quiz"><ol><li>Garnet is an isotropic mineral. Use the A switch to toggle between plane (left) and cross (right) polarized light. What do you observe?
+      <ol>
+        <li> Under cross polarized light, the mineral appears blue.
+
+        </li>
+        <li>Under plane polarized light, the mineral appears blue.
+          <ol>
+            <li>Please look again. Remember, cross polarization is active when the switch is positioned on the right.</li>
+          </ol>
+        </li>
+        <li>I am unable to toggle the switch.
+          <ol>
+            <li>To complete this activity, you need to use a browser that supports both Flash and javascript.</li>
+          </ol>
+        </li>
+      </ol>
+</li>
+    <li>Under plane polarized light, slowly rotate the stage 180&deg;. What do you observe?
+      <ol>
+        <li>As I rotate the stage counter-clockwise, the image rotates clockwise. Apart from that, not much happens.
+          <ol>
+            <li>True. Light microscopes behave that way because images are inverted by the magnifying lenses.</li>
+          </ol>
+        </li>
+        <li>As I rotate the stage, the colors in the mineral change.
+          <ol>
+            <li>Please look again. Remember,plane polarization is active when the switch is positioned on the left.</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li>Now switch to cross polarized light, and rotate the stage again. What do you observe?
+      <ol>
+        <li>The brightness of some areas changes as the specimen rotates.
+          <ol>
+            <li>correct</li>
+          </ol>
+        </li>
+        <li>Same as before, except bluer.
+          <ol>
+            <li>Try again. Focus on the brightest areas of the specimen.</li>
+          </ol>
+        </li>
+        
+      </ol>
+</li>
+
+    </ol>
+<div id="success"></div></div>
+  <iframe src="//apps.ats.udel.edu/canvas/mashup/exercises/ufl/specimen.html?specimen=garnet" width="542" height="680" scrolling="no"></iframe>  
+<!--/*<iframe src="https://apps.ats.udel.edu/learningobjects/watson/circuit.html" width="700" height="530" frameborder="0" scrolling="no" style="overflow:hidden"></iframe>*/-->
+<script>
+function sendScore(obj){
+
+var post = new Object();
+	for(var x in obj){
+		post[x]=obj[x];
+		
+	}
+	
+		$("#success").load("reportScore.php",post,function(response){
+		$("body").html("<p>Your grade has been submitted</p>");
+	});//.hide();;
+	
+}
+$(document).ready(function(e) {
+	$('#quiz').listtricksQuiz({sendScore:sendScore,addClass:'left'});
+    
+});
+</script>
+</body>
+</html>

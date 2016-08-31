@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<!--
+This page should be loaded into the mmashup.php template iframe, which is similar to the multitool.php page, except that the score reporting functions are replaced by the callback within the listricksQuiz closure. Hopefully this makes it a tiny bit harder to hack.
+-->
+<meta charset="utf-8">
+<title>stop+using+IE</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="/canvas/mashup/listtricks-quiz.js"></script>
+  
+
+<link href="/canvas/liststricks-quiz.css" rel="stylesheet" type="text/css">
+<link href="/canvas/mashup/mashup.css" rel="stylesheet" type="text/css">
+<style>
+.left .quiz{background: rgb(69, 194, 253);}
+iframe{
+	
+	margin-left:2px;
+}
+</style>
+</head>
+
+<body>
+<div id="quiz"><ol>
+<li>Take a look at the graph of y=sin(x). This is a function that can be used to explore the nature of waves. A wave has an amplitude (height) and a wavelength (width). Create a new equation by clicking on the plus button. Try the function y=sin(2x). What impact does this have on your wave?
+	<ol>
+		<li>The wavelength has decreased relative to y=sin(x). 
+		  
+	    </li>
+		<li>The wavelength has increased relative to y=sinx. 
+		
+	    </li>
+		<li>The amplitude has increased relative to the original.
+		</li>
+		<li>The amplitude has decreased relative to the original.
+		</li>
+	  </ol>
+	<!--end answers -->
+</li><!--end q1 -->
+<li>Now try putting a multiplier in front of the sin function rather than inside. What impact do you see now?
+	<ol>	
+    <li>The amplitude has increased relative to the original.
+		</li>
+		<li>The wavelength has decreased relative to y=sin(x). 
+		  
+	    </li>
+		<li>The wavelength has increased relative to y=sinx. 
+		
+	    </li>
+	
+		<li>The amplitude has decreased relative to the original.
+	    </li>
+	  </ol>
+</li>
+<li>Looking back at the original graph, we can see that the curve crosses over the x axis many times. What is the value of the x coordinate of the first such crossing to the right of zero?
+  <ol>
+    <li>pi
+      <ol>
+        <li>Exactly. The sin of pi is zero. Also the sign of 2pi, 3pi, 4pi...</li>
+      </ol>
+    </li>
+    <li>3
+      <ol>
+        <li>Please try to be a little bit more precise</li>
+      </ol>
+    </li>
+    <li>3.14
+      <ol>
+        <li>Which is an approximation of...?</li>
+      </ol>
+    </li>
+    </ol>
+</li>
+</ol>
+<div id="success"></div></div>
+    
+<iframe src="https://www.edu-apps.org/graph.tk/index.html#json=%7B%22graphs%22%3A%7B%22y%3Dsin%5C%5Cleft(x%5C%5Cright)%22%3A1%7D%2C%22scale%22%3A%5B65%2C65%2C65%5D%2C%22camera%22%3A%5B-166%2C266%2C10000%5D%2C%22snapshot%22%3A1%2C%22console%22%3A0%2C%22reload%22%3A1%2C%22legend%22%3A1%2C%22block%22%3A0%7D" width="600" height="520" frameborder="0" scrolling="no"></iframe>
+<script>
+function sendScore(obj){
+
+var post = new Object();
+	for(var x in obj){
+		post[x]=obj[x];
+		
+	}
+	
+	$("#success").load("reportScore.php",post,function(response){
+		$("body").html("<p>Your grade has been submitted</p>");
+	});//.hide();;
+	
+}
+$(document).ready(function(e) {
+	$('#quiz').listtricksQuiz({sendScore:sendScore,addClass:'left'});
+    
+});
+</script>
+</body>
+</html>

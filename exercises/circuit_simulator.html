@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<!--
+This page should be loaded into the mmashup.php template iframe, which is similar to the multitool.php page, except that the score reporting functions are replaced by the callback within the listricksQuiz closure. Hopefully this makes it a tiny bit harder to hack.
+-->
+<meta charset="utf-8">
+<title>Quiz Template Compact</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="/canvas/mashup/listtricks-quiz.js"></script>
+  
+<!-- <script src="../canvas/quiz.js"></script> <style>
+  .hidden{display:none}
+  </style>-->
+<link href="/canvas/liststricks-quiz.css" rel="stylesheet" type="text/css">
+<link href="/canvas/mashup/mashup.css" rel="stylesheet" type="text/css">
+<style>
+.left .quiz{background: rgb(69, 194, 253);}
+iframe{
+	
+	margin-left:2px;
+}
+</style>
+</head>
+
+<body>
+<div id="quiz"><ol>
+<li>This is the very first educational simulation ever written in Flash by an ATS (PRESENT) staff member. It can be used to explore the relationships between voltage, current and resistance. Try it out. Easy? Fun?
+	<ol>
+		<li>Yes, it is pretty cool. 
+		  <ol>
+		    <li>I agree, but what have you learned?</li>
+	      </ol>
+	    </li>
+		<li>No, resistance always zero! 
+		  <ol>
+		    <li>Resistors are in the file cabinet. Click on a drawer to open it. Did you read or watch the instructions?</li>
+	      </ol>
+	    </li>
+		<li>Aaack! I got a big red warning.
+		  <ol>
+		    <li>Never add or remove a circuit element while current is flowing.</li>
+	      </ol>
+		</li>
+
+	  </ol>
+	<!--end answers -->
+</li><!--end q1 -->
+<li>Suppose you were teaching a course that included a review of basic electronics, and you provided a link to this simulation (sans quiz) for your students. What would be the impact?
+<ol>
+
+	<li>No impact. Students would either not visit the site, or would visit and fiddle with the simulation without learning anything.
+		<ol>
+			<li>Unfortunately, that has been my experience. Without both guidance and accountability, the hours you spend digging up great links is wasted.</li>
+		</ol>
+	</li>
+	<li>Students would be better prepared for the more advanced concepts covered in my course.
+		<ol>
+			<li>Not likely. The few students who actually choose to explore and learn were probably going to be your best students in any case.</li>
+		</ol>
+        </li>
+	<li>My course ratings would skyrocket because this is a fun activity.
+		<ol>
+			<li>You can always hope.</li>
+		</ol>
+     </li>
+    </ol>
+    </li>
+    <li>What can you do to increase the likelihood that content you link to will have a positive impact on learning?
+      <ol><li>
+      Associate links with a graded activity, such as discussion, PBL, or a very quick quiz.
+      <ol>
+        <li>Yes. This self-test can return a grade to the Canvas gradebook. You can make it pass/fail or associate some points. Either way, the odds that your students will follow the link will be vastly improved.</li>
+        </ol>
+    </li>
+      <li>Check the course activity logs to see which students have visited the page.
+        <ol>
+          <li>That seems like a lot of work, and does not provide the students  with feedback or guidance.</li>
+          </ol>
+      </li>
+      </ol>
+    </li>
+    <li>What if I use Sakai?
+      <ol>
+        <li>Sorry, Sakai@UD does not currently support grade passback.</li>
+        <li>You can use these same exercises with Sakai, but you have to get help from a Sakai admin.
+          <ol>
+            <li>Yes and no. You can link to the exercises, but you will get no grade back.</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li>Where do the self-test questions come from?
+      <ol>
+        <li>You write your own questions in outline form.</li>
+        <li>You are stuck with the questions and exercises you see here.
+          <ol>
+            <li>Not at all. You can adopt any existing activity, and write your own questions, or start from scratch with a url of your own choosing.</li>
+          </ol>
+        </li>
+        <li>Becky writes them.
+          <ol>
+            <li>For these examples, yes, but that's just proof-of-concept.</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    </ol>
+<div id="success"></div></div>
+    
+<iframe src="https://apps.ats.udel.edu/learningobjects/watson/circuit.html" width="700" height="530" frameborder="0" scrolling="no" style="overflow:hidden"></iframe>
+<script>
+function sendScore(obj){
+
+var post = new Object();
+	for(var x in obj){
+		post[x]=obj[x];
+		
+	}
+	
+		$("#success").load("reportScore.php",post,function(response){
+		$("body").html("<p>Your grade has been submitted</p>");
+	});//.hide();;
+	
+}
+$(document).ready(function(e) {
+	$('#quiz').listtricksQuiz({sendScore:sendScore,addClass:'left'});
+    
+});
+</script>
+</body>
+</html>
